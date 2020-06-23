@@ -12,6 +12,8 @@ namespace HolaMundoMVC.Controllers
             escuela.AñoFundacion = 2020;
             escuela.Nombre = "Prueba";
             escuela.EscuelaId = Guid.NewGuid().ToString();
+
+            ViewBag.CualquierCosa = "esto es cualquier cosa";
             return View(escuela);
         }
 }
