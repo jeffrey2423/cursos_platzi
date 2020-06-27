@@ -1,0 +1,19 @@
+﻿@* Indica que usaremos un modelo fuertemente tipado *@
+@model List<Asignatura>
+
+@{
+    ViewData["Title"] = "Informacion Asignatura";
+}
+
+<h1>@ViewData["Tittle"]  </h1>
+@* Razor *@
+<strong>Desde la vista parcial</strong>
+@foreach (var item in Model)
+{
+    <partial name="AsignaturaSimple" model="item"/>
+}
+
+
+
+
+<p>@ViewBag.Fecha</p>
