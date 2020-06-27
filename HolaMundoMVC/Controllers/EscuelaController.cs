@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HolaMundoMVC.Models;
 using System;
+using CoreEscuela.Entidades;
 
 namespace HolaMundoMVC.Controllers
 {
@@ -9,12 +10,16 @@ namespace HolaMundoMVC.Controllers
         public IActionResult Index()
         {
             var escuela = new Escuela();
-            escuela.AñoFundacion = 2020;
-            escuela.Nombre = "Prueba";
-            escuela.EscuelaId = Guid.NewGuid().ToString();
+            escuela.AñoDeCreacion = 2020;
+            escuela.Nombre = "Escuela de Prueba";
+            escuela.UniqueId = Guid.NewGuid().ToString();
+            escuela.Ciudad = "Cali";
+            escuela.Pais = "Colombia"; 
+            escuela.TipoEscuela = TiposEscuela.Secundaria;
+            escuela.Dirección = "Cali-Colombia";
 
             ViewBag.CualquierCosa = "esto es cualquier cosa";
             return View(escuela);
         }
-}
+    }
 }
