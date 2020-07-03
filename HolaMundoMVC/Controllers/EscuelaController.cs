@@ -8,7 +8,7 @@ namespace HolaMundoMVC.Controllers
 {
     public class EscuelaController : Controller
     {
-        private EscuelaContext _context;
+
         public IActionResult Index()
         {
             // var escuela = new Escuela();
@@ -22,12 +22,13 @@ namespace HolaMundoMVC.Controllers
 
             ViewBag.CualquierCosa = "esto es cualquier cosa";
 
-             var escuela = _context.Escuelas.FirstOrDefault();
-           
+            var escuela = _context.Escuelas.FirstOrDefault();
+
             return View(escuela);
         }
-
-        public EscuelaController(EscuelaContext context){
+        private EscuelaContext _context;
+        public EscuelaController(EscuelaContext context)
+        {
             _context = context;
         }
     }

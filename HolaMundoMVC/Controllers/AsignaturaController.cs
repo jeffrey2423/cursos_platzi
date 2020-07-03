@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HolaMundoMVC.Models;
 using System;
+using System.Linq;
 using CoreEscuela.Entidades;
 using System.Collections.Generic;
 
@@ -11,14 +12,17 @@ namespace HolaMundoMVC.Controllers
         public IActionResult Index()
         {
 
-            return View(new Asignatura
-            {
-                Nombre = "Programacion",
-                Id = Guid.NewGuid().ToString()
-            });
+            return View(
+                // new Asignatura
+                // {
+                //     Nombre = "Programacion",
+                //     Id = Guid.NewGuid().ToString()
+                // }
+                _context.Asignaturas.FirstOrDefault()
+            );
         }
 
-        
+
         public IActionResult MultiAsignatura()
         {
             var listaAsignaturas = new List<Asignatura>() {
@@ -49,7 +53,14 @@ namespace HolaMundoMVC.Controllers
             ViewBag.Fecha = DateTime.Now;
 
 
-            return View("MultiAsignatura", listaAsignaturas);
+            // return View("MultiAsignatura", listaAsignaturas);
+            return View("MultiAsignatura", _context.Asignaturas);
+        }
+
+        private EscuelaContext _context;
+        public AsignaturaController(EscuelaContext context)
+        {
+            _context = context;
         }
     }
 }

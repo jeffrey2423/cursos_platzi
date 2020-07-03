@@ -12,11 +12,14 @@ namespace HolaMundoMVC.Controllers
         public IActionResult Index()
         {
 
-            return View(new Alumno
-            {
-                Nombre = "pepe",
-                Id = Guid.NewGuid().ToString()
-            });
+            return View(
+                // new Alumno
+                // {
+                //     Nombre = "pepe",
+                //     Id = Guid.NewGuid().ToString()
+                // }
+                _context.Alumnos.FirstOrDefault()
+            );
         }
 
 
@@ -50,7 +53,8 @@ namespace HolaMundoMVC.Controllers
             ViewBag.Fecha = DateTime.Now;
 
 
-            return View("MultiAlumno", listaAlumnos);
+            // return View("MultiAlumno", listaAlumnos);
+            return View("MultiAlumno", _context.Alumnos);
         }
 
         private List<Alumno> GenerarAlumnosAlAzar()
@@ -65,6 +69,12 @@ namespace HolaMundoMVC.Controllers
                                select new Alumno { Nombre = $"{n1} {n2} {a1}", Id = Guid.NewGuid().ToString() };
 
             return listaAlumnos.OrderBy((al) => al.Id).ToList();
+        }
+
+        private EscuelaContext _context;
+        public AlumnoController(EscuelaContext context)
+        {
+            _context = context;
         }
     }
 }
