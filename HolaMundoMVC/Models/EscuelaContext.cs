@@ -30,7 +30,7 @@ namespace HolaMundoMVC.Models
             escuela.Ciudad = "Cali";
             escuela.Pais = "Colombia";
             escuela.TipoEscuela = TiposEscuela.Secundaria;
-            escuela.Dirección = "Cali-Colombia";          
+            escuela.Dirección = "Cali-Colombia";
 
             //cargar cursos de la escuela
 
@@ -43,11 +43,13 @@ namespace HolaMundoMVC.Models
             var alumnos = CargarAlumnos(cursos);
 
             //cargar evaluaciones
+            var evaluaciones = CargarEvaluaciones(cursos,asignaturas,alumnos);
 
             modelBuilder.Entity<Escuela>().HasData(escuela);
             modelBuilder.Entity<Curso>().HasData(cursos.ToArray());
             modelBuilder.Entity<Asignatura>().HasData(asignaturas.ToArray());
             modelBuilder.Entity<Alumno>().HasData(alumnos.ToArray());
+            modelBuilder.Entity<Evaluación>().HasData(evaluaciones.ToArray());
 
             // modelBuilder.Entity<Asignatura>().HasData(
             //     new Asignatura
@@ -151,6 +153,40 @@ namespace HolaMundoMVC.Models
                                };
 
             return listaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
+        }
+
+        private List<Evaluación> CargarEvaluaciones(List<Curso> cursos, List<Asignatura> asignaturas, List<Alumno> alumnos, int numeroEvaluaciones = 5)
+        {
+            Random rnd = new Random();
+            var listaEv = new List<Evaluación>();
+            foreach (var curso in cursos)
+            {
+                foreach (var asignatura in asignaturas)
+                {
+                    foreach (var alumno in alumnos)
+                    {
+                        for (int i = 0; i < numeroEvaluaciones; i++)
+                        {
+                            int cantRandom = rnd.Next(0, 500);
+                            var tmp = new List<Evaluación> {
+                                new Evaluación
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Nombre = "Evaluación de " + asignatura.Nombre + " # " + (i + 1),
+                                    AlumnoId = alumno.Id,
+                                    Alumno = alumno,
+                                    AsignaturaId = asignatura.Id,
+                                    Asignatura = asignatura,
+                                    Nota = (float)cantRandom / 100
+                                }
+                            };
+                            listaEv.AddRange(tmp);
+                        }
+                    }
+                }
+            }
+
+            return listaEv;
         }
 
 

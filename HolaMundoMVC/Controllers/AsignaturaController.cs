@@ -9,17 +9,38 @@ namespace HolaMundoMVC.Controllers
 {
     public class AsignaturaController : Controller
     {
-        public IActionResult Index()
-        {
+        // public IActionResult Index()
+        // {
 
-            return View(
-                // new Asignatura
-                // {
-                //     Nombre = "Programacion",
-                //     Id = Guid.NewGuid().ToString()
-                // }
-                _context.Asignaturas.FirstOrDefault()
-            );
+        //     return View(
+        //         // new Asignatura
+        //         // {
+        //         //     Nombre = "Programacion",
+        //         //     Id = Guid.NewGuid().ToString()
+        //         // }
+        //         _context.Asignaturas.FirstOrDefault()
+        //     );
+        // }
+        [Route("Asignatura/Index")]
+        [Route("Asignatura/Index/{AsignaturaId}")]
+        public IActionResult Index(string AsignaturaId)
+        {
+            if (!string.IsNullOrWhiteSpace(AsignaturaId))
+            {
+                var asignatura = from asig in _context.Asignaturas
+                                 where asig.Id == AsignaturaId
+                                 select asig;
+                return View(
+
+                asignatura.SingleOrDefault()
+                );
+            }
+            else
+            {
+                return View("MultiAsignatura", _context.Asignaturas);
+            }
+
+
         }
 
 
