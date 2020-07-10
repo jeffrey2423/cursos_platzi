@@ -43,13 +43,13 @@ namespace HolaMundoMVC.Models
             var alumnos = CargarAlumnos(cursos);
 
             //cargar evaluaciones
-            var evaluaciones = CargarEvaluaciones(cursos,asignaturas,alumnos);
+            // var evaluaciones = CargarEvaluaciones(cursos,asignaturas,alumnos);
 
             modelBuilder.Entity<Escuela>().HasData(escuela);
             modelBuilder.Entity<Curso>().HasData(cursos.ToArray());
             modelBuilder.Entity<Asignatura>().HasData(asignaturas.ToArray());
             modelBuilder.Entity<Alumno>().HasData(alumnos.ToArray());
-            modelBuilder.Entity<Evaluación>().HasData(evaluaciones.ToArray());
+            // modelBuilder.Entity<Evaluación>().HasData(evaluaciones.ToArray());
 
             // modelBuilder.Entity<Asignatura>().HasData(
             //     new Asignatura

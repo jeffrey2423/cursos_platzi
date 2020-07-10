@@ -9,7 +9,7 @@ namespace HolaMundoMVC.Models
 
         public ObjetoEscuelaBase()
         {
-            // UniqueId = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
         }
 
         public override string ToString()

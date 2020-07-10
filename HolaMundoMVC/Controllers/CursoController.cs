@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace HolaMundoMVC.Controllers
 {
-    public class AlumnoController : Controller
+    public class CursoController : Controller
     {
         // [Route("Alumno/Index")]
         // [Route("Alumno/Index/{AsignaturaId}")]
@@ -15,23 +15,23 @@ namespace HolaMundoMVC.Controllers
         {
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var alumno = from alum in _context.Alumnos
-                                 where alum.Id == id
-                                 select alum;
+                var curso = from cur in _context.Cursos
+                                 where cur.Id == id
+                                 select cur;
                 return View(
-                alumno.SingleOrDefault()
+                curso.SingleOrDefault()
                 );
             }
             else
             {
-                return View("MultiAlumno", _context.Alumnos);
+                return View("MultiCurso", _context.Cursos);
             }
 
 
         }
 
 
-        public IActionResult MultiAlumno()
+        public IActionResult MultiCurso()
         {
             // var listaAlumnos = new List<Alumno>() {
             //     new Alumno {
@@ -62,7 +62,7 @@ namespace HolaMundoMVC.Controllers
 
 
             // return View("MultiAlumno", listaAlumnos);
-            return View("MultiAlumno", _context.Alumnos);
+            return View("MultiCurso", _context.Cursos);
         }
 
         private List<Alumno> GenerarAlumnosAlAzar()
@@ -79,8 +79,30 @@ namespace HolaMundoMVC.Controllers
             return listaAlumnos.OrderBy((al) => al.Id).ToList();
         }
 
+        public IActionResult Create()
+        {
+
+            ViewBag.Fecha = DateTime.Now;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Curso curso)
+        {
+            ViewBag.Fecha = DateTime.Now;
+
+            var escuela = _context.Escuelas.FirstOrDefault();
+            
+            curso.EscuelaId = escuela.Id;
+            _context.Cursos.Add(curso);
+            _context.SaveChanges();
+
+            return View();
+        }
+
         private EscuelaContext _context;
-        public AlumnoController(EscuelaContext context)
+        public CursoController(EscuelaContext context)
         {
             _context = context;
         }
