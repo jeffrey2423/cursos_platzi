@@ -91,14 +91,25 @@ namespace HolaMundoMVC.Controllers
         public IActionResult Create(Curso curso)
         {
             ViewBag.Fecha = DateTime.Now;
+            ViewBag.mensaje = null;
+            ViewBag.err = false;
 
+            if(ModelState.IsValid){
             var escuela = _context.Escuelas.FirstOrDefault();
             
             curso.EscuelaId = escuela.Id;
             _context.Cursos.Add(curso);
             _context.SaveChanges();
+            ViewBag.mensaje = "Curso guardado con exito";
+            return View("Index", curso);
 
-            return View();
+            }else{
+                ViewBag.err = true;
+                ViewBag.mensaje = "El curso no es valido";
+                return View(curso);
+            }
+            
+
         }
 
         private EscuelaContext _context;
