@@ -126,13 +126,18 @@ namespace HolaMundoMVC.Models
                     new Curso{
                         Id = Guid.NewGuid().ToString(),
                         Nombre = "101",
-                              Jornada = TiposJornada.Mañana,
-                              EscuelaId = escuela.Id},
+                        Jornada = TiposJornada.Mañana,
+                        EscuelaId = escuela.Id,
+                        Dirección = "Calle falsa"},
                     new Curso{Id = Guid.NewGuid().ToString(),
-                        Nombre = "201", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id},
-                    new Curso{Id = Guid.NewGuid().ToString(), Nombre = "301", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id},
-                    new Curso{Id = Guid.NewGuid().ToString(),Nombre = "401", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id},
-                    new Curso{Id = Guid.NewGuid().ToString(),Nombre = "501", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id}
+                        Nombre = "201", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id,
+                        Dirección = "Calle falsa"},
+                    new Curso{Id = Guid.NewGuid().ToString(), Nombre = "301", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id,
+                        Dirección = "Calle falsa"},
+                    new Curso{Id = Guid.NewGuid().ToString(),Nombre = "401", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id,
+                        Dirección = "Calle falsa"},
+                    new Curso{Id = Guid.NewGuid().ToString(),Nombre = "501", Jornada = TiposJornada.Mañana, EscuelaId = escuela.Id,
+                        Dirección = "Calle falsa"}
                 };
         }
 
